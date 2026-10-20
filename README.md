@@ -1,59 +1,35 @@
-# Lua
+# Tienda de Belleza – Front-end
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.15.
+Front-end en **Angular** de una plataforma de comercio electrónico para una tienda de belleza real, con catálogo público, carrito de compras y panel administrativo.
 
-## Development server
+🔗 **Backend (API REST):** [tienda-belleza](https://github.com/puertadavid72-collab/tienda-belleza)
 
-To start a local development server, run:
+## Funcionalidades
 
-```bash
-ng serve
-```
+- **Catálogo público** de productos reales (más de 370 productos y 400 variantes), con filtro por categoría.
+- **Carrito de compras** sin necesidad de crear cuenta.
+- **Panel administrativo** con CRUD de categorías, marcas y productos.
+- **Inicio de sesión** del administrador con JWT, rutas protegidas con guard e interceptor que agrega el token automáticamente.
+- Contacto con la tienda por **WhatsApp**.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Tecnologías
 
-## Code scaffolding
+- Angular (componentes standalone, SSR)
+- TypeScript
+- HttpClient, RxJS (Observables, BehaviorSubject, async pipe)
+- HTML y CSS
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Cómo ejecutarlo
 
-```bash
-ng generate component component-name
-```
+1. Tener corriendo la API del [backend](https://github.com/puertadavid72-collab/tienda-belleza) en `http://localhost:3000`.
+2. Instalar dependencias: `npm install`
+3. Iniciar el servidor de desarrollo: `ng serve`
+4. Abrir `http://localhost:4200` en el navegador.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Estado del proyecto
 
-```bash
-ng generate --help
-```
+Front-end conectado a la API. Pendiente: despliegue en producción, gestión de colores y variantes desde el panel, y pasarela de pagos.
 
-## Building
+## Autor
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Diego David Muñetón Puerta – Estudiante de Tecnología en Desarrollo de Software, Politécnico Internacional.
