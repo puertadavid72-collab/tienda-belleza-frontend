@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" role="img" aria-label="Sin foto">
+  <rect width="300" height="300" fill="#E4D6E9"/>
+  <path d="M150 90a38 38 0 1 0 31 60 32 32 0 1 1-31-60z" fill="#6E5A8A" fill-opacity=".35"/>
+  <text x="150" y="208" text-anchor="middle" font-family="Figtree, system-ui, sans-serif" font-size="18" fill="#6E5A8A">Sin foto</text>
+</svg>

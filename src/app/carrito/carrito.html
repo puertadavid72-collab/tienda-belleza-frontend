@@ -1,0 +1,95 @@
+<section class="carrito">
+  <h1 class="carrito-title">Tu carrito</h1>
+
+  <ng-container *ngIf="carrito$ | async as data">
+    <div *ngIf="data.items.length > 0; else carritoVacio">
+      <div class="row g-4">
+        <div class="col-lg-8">
+          <div class="cart-item" *ngFor="let item of data.items">
+
+            <img [src]="item.imagen || 'sin-foto.svg'" class="cart-item-img" alt="{{ item.producto }}" (click)="abrirVistaPrevia(item)">
+
+            <div class="cart-item-info">
+              <h5 class="cart-item-name">{{ item.producto }}</h5>
+              <p class="cart-item-meta">Color: {{ item.color }}</p>
+
+              <div class="cart-item-actions">
+                <div class="qty">
+                  <button class="qty-btn" aria-label="Disminuir cantidad" (click)="disminuirCantidad(item)">−</button>
+                  <span class="qty-value">{{ item.cantidad }}</span>
+                  <button class="qty-btn" aria-label="Aumentar cantidad" [disabled]="item.stock != null && item.cantidad >= item.stock" (click)="aumentarCantidad(item)">+</button>
+                </div>
+                <button class="btn btn-sm btn-link text-danger p-0" (click)="eliminarProducto(item)">Quitar</button>
+              </div>
+            </div>
+
+            <p class="cart-item-price">${{ (item.precio * item.cantidad) | number }}</p>
+
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <aside class="summary">
+            <div class="summary-moon" aria-hidden="true"></div>
+            <h4 class="summary-title">Resumen</h4>
+            <div class="summary-row">
+              <span>Total a pagar</span>
+              <span class="summary-total">${{ calcularTotal(data.items) | number }}</span>
+            </div>
+            <button class="btn summary-btn w-100 py-3 mb-2" (click)="finalizarCompra(data.items)">
+              <i class="bi bi-whatsapp" aria-hidden="true"></i> Pedir por WhatsApp
+            </button>
+            <p class="summary-note">Te abrimos WhatsApp con tu pedido listo para enviar. Ahí confirmamos disponibilidad, envío y pago.</p>
+            <button class="btn summary-btn-ghost w-100 py-2" (click)="vaciarCarrito()">
+              Vaciar carrito
+            </button>
+          </aside>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #carritoVacio>
+      <div class="empty">
+        <div class="empty-moon" aria-hidden="true"></div>
+        <h4 class="empty-title">Tu carrito está vacío</h4>
+        <p class="empty-text">Explora el catálogo y agrega los productos que quieras probar.</p>
+        <a routerLink="/catalogo" class="btn btn-dark px-4 py-2">
+          Ver catálogo
+        </a>
+      </div>
+    </ng-template>
+  </ng-container>
+</section>
+
+<div class="modal fade" [class.show]="mostrarModal" [ngStyle]="{'display': mostrarModal ? 'block' : 'none'}" [style.background-color]="mostrarModal ? 'rgba(0,0,0,0.5)' : 'transparent'" tabindex="-1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content p-4" *ngIf="productoSeleccionado">
+
+      <div class="d-flex justify-content-end mb-2">
+        <button type="button" class="modal-close" aria-label="Cerrar" (click)="cerrarModal()">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+
+      <div class="row g-4 align-items-center">
+        <div class="col-md-6">
+          <div class="preview-media">
+            <img [src]="productoSeleccionado.imagen || 'sin-foto.svg'" class="img-fluid" alt="...">
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <h3 class="preview-name">{{ productoSeleccionado.producto }}</h3>
+          <div class="preview-price">${{ productoSeleccionado.precio | number }}</div>
+          <p class="cart-item-meta mb-1">Color: {{ productoSeleccionado.color }}</p>
+          <p class="cart-item-meta mb-4">Cantidad: {{ productoSeleccionado.cantidad }}</p>
+
+          <button class="btn btn-dark w-100 py-2" (click)="cerrarModal()">
+            Cerrar
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<section class="hero-video-container">
+  <div class="hero-overlay" aria-hidden="true"></div>
+
+  <div class="hero-content">
+    <p class="hero-kicker">Colección exclusiva Lúa</p>
+    <h1 class="hero-title">Dúo de contorno y definición de labios</h1>
+    <p class="hero-text">
+      Definición duradera, esculpido perfecto y color multidimensional para resaltar tu belleza natural.
+    </p>
+    <button class="btn hero-btn" routerLink="/catalogo">
+      Ver el catálogo
+    </button>
+  </div>
+</section>
+
+<div class="section-head">
+  <h2 class="section-title">Encuentra lo que necesitas</h2>
+  <div class="carousel-arrows">
+    <button class="arrow-btn" type="button" aria-label="Anterior" (click)="scrollCards(scrollContainer, -320)"><i class="bi bi-chevron-left"></i></button>
+    <button class="arrow-btn" type="button" aria-label="Siguiente" (click)="scrollCards(scrollContainer, 320)"><i class="bi bi-chevron-right"></i></button>
+  </div>
+</div>
+
+<div #scrollContainer class="cards-container">
+
+  <div *ngFor="let cat of categorias$ | async" class="category-card">
+    <div class="category-media">
+      <img [src]="cat.imagen || 'sin-foto.svg'" class="category-img" [alt]="cat.nombre">
+    </div>
+    <div class="category-body">
+      <h5 class="category-name">{{ cat.nombre.toUpperCase() }}</h5>
+      <span class="category-icon-btn" [routerLink]="['/catalogo']" [queryParams]="{ categoria_id: cat.id }" style="cursor: pointer;"><i class="bi bi-arrow-up-right"></i></span>
+    </div>
+  </div>
+
+  <a href="https://wa.me/573135357698" target="_blank" class="whatsapp-flotante"
+   onmouseover="document.getElementById('whatsapp-text').innerText='WhatsApp';"
+   onmouseout="document.getElementById('whatsapp-text').innerText='Chat';">
+    <span id="whatsapp-text" class="whatsapp-tooltip">Chat</span>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+  </a>
+
+</div>
+
+<app-footer></app-footer>

@@ -1,0 +1,167 @@
+.carrito { padding: 24px 0 96px; }
+
+.carrito-title {
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  margin-bottom: 36px;
+}
+
+/* ----- Ítems ----- */
+.cart-item {
+  display: grid;
+  grid-template-columns: 104px 1fr auto;
+  gap: 24px;
+  align-items: center;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--lua-linea);
+}
+.cart-item:first-child { border-top: 1px solid var(--lua-ciruela); }
+
+/* Mismo arco del catálogo, en pequeño */
+.cart-item-img {
+  width: 104px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 999px 999px 10px 10px;
+  background: var(--lua-lila-claro);
+  cursor: zoom-in;
+}
+
+.cart-item-name {
+  font-family: var(--lua-serif);
+  font-weight: 500;
+  font-size: 1.35rem;
+  margin-bottom: 2px;
+}
+
+.cart-item-meta {
+  color: var(--lua-texto-suave);
+  font-size: .9rem;
+  margin-bottom: 14px;
+}
+
+.cart-item-actions { display: flex; align-items: center; gap: 20px; }
+
+.qty {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--lua-linea);
+  border-radius: 999px;
+  background: var(--lua-blanco);
+}
+
+.qty-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--lua-ciruela);
+  font-size: 1.1rem;
+}
+.qty-btn:hover { background: var(--lua-lila-claro); }
+.qty-btn:disabled { color: var(--lua-linea); background: transparent; cursor: not-allowed; }
+
+.qty-value { min-width: 28px; text-align: center; font-weight: 600; }
+
+.cart-item-price {
+  margin: 0;
+  font-family: var(--lua-serif);
+  font-size: 1.5rem;
+  text-align: right;
+}
+
+/* ----- Resumen: panel de noche ----- */
+.summary {
+  position: sticky;
+  top: 100px;
+  overflow: hidden;
+  padding: 32px;
+  border-radius: var(--lua-radio-lg);
+  background:
+    radial-gradient(90% 70% at 100% 0%, #4A3D5C 0%, transparent 65%),
+    var(--lua-ciruela);
+  color: rgba(255, 255, 255, .72);
+}
+
+.summary-moon {
+  position: absolute;
+  top: 26px;
+  right: 28px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  box-shadow: inset -11px 8px 0 0 var(--lua-lavanda);
+  transform: rotate(-12deg);
+  opacity: .9;
+}
+
+.summary-title { color: var(--lua-lavanda); font-size: 1rem; margin-bottom: 40px; }
+
+.summary-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 28px;
+}
+
+.summary-total {
+  font-family: var(--lua-serif);
+  font-size: 2.75rem;
+  line-height: 1.05;
+  color: var(--lua-blanco);
+}
+
+.summary-btn { background: var(--lua-lavanda); color: var(--lua-ciruela); }
+.summary-btn:hover, .summary-btn:focus-visible { background: var(--lua-blanco); color: var(--lua-ciruela); }
+
+.summary-note { font-size: .82rem; line-height: 1.5; color: rgba(255, 255, 255, .6); margin: 4px 0 16px; }
+
+.summary-btn-ghost {
+  background: transparent;
+  color: rgba(255, 255, 255, .78);
+  border: 1px solid rgba(255, 255, 255, .22);
+}
+.summary-btn-ghost:hover { background: rgba(255, 255, 255, .08); color: var(--lua-blanco); border-color: rgba(255, 255, 255, .4); }
+
+/* ----- Vacío ----- */
+.empty { text-align: center; padding: 64px 24px 80px; }
+
+.empty-moon {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 28px;
+  border-radius: 50%;
+  box-shadow: inset -20px 14px 0 0 var(--lua-violeta);
+  transform: rotate(-12deg);
+}
+
+.empty-title { font-family: var(--lua-serif); font-weight: 500; font-size: 2rem; margin-bottom: 8px; }
+.empty-text { color: var(--lua-texto-suave); margin-bottom: 28px; }
+
+/* ----- Modal ----- */
+.modal-close {
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--lua-linea);
+  border-radius: 50%;
+  background: var(--lua-blanco);
+  color: var(--lua-ciruela);
+}
+.modal-close:hover { background: var(--lua-lila-claro); }
+
+.preview-media {
+  padding: 20px;
+  text-align: center;
+  border-radius: 999px 999px var(--lua-radio) var(--lua-radio);
+  background: var(--lua-lila-claro);
+}
+.preview-media img { max-height: 300px; object-fit: contain; }
+
+.preview-name { font-size: 1.9rem; }
+.preview-price { font-family: var(--lua-serif); font-size: 1.6rem; color: var(--lua-violeta); margin-bottom: 14px; }
+
+@media (max-width: 576px) {
+  .cart-item { grid-template-columns: 80px 1fr; gap: 16px; }
+  .cart-item-img { width: 80px; height: 100px; }
+  .cart-item-price { grid-column: 2; text-align: left; }
+}

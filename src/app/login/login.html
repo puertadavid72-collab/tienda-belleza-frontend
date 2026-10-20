@@ -1,0 +1,38 @@
+<div class="login-wrap">
+  <div class="login-card">
+
+    <!-- Lado noche: la marca -->
+    <aside class="login-night" aria-hidden="true">
+      <div class="login-moon"></div>
+      <p class="login-brand">Lúa</p>
+      <p class="login-note">Gestión de la tienda</p>
+    </aside>
+
+    <!-- Formulario -->
+    <div class="login-form">
+      <h3 class="login-title">Iniciar sesión</h3>
+      <p class="login-sub">Ingresa con tu cuenta de administración.</p>
+
+      <div *ngIf="mensajeError" class="alert alert-danger py-2">
+        {{ mensajeError }}
+      </div>
+
+      <form (ngSubmit)="iniciarSesion()">
+        <div class="mb-3">
+          <label class="form-label" for="login-email">Correo electrónico</label>
+          <input id="login-email" type="email" class="form-control" autocomplete="username" [(ngModel)]="email" name="email" required>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label" for="login-pass">Contraseña</label>
+          <input id="login-pass" type="password" class="form-control" autocomplete="current-password" [(ngModel)]="contrasena" name="contrasena" required>
+        </div>
+
+        <button type="submit" class="btn btn-dark w-100 py-2" [disabled]="cargando">
+          {{ cargando ? 'Ingresando...' : 'Iniciar sesión' }}
+        </button>
+      </form>
+    </div>
+
+  </div>
+</div>

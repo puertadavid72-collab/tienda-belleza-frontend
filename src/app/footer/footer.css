@@ -1,0 +1,134 @@
+/* Misma noche ciruela del hero: la página abre y cierra igual */
+.footer-lua {
+  position: relative;
+  padding: 80px 0 0;
+  background: var(--lua-ciruela);
+  color: rgba(255, 255, 255, .62);
+  /* A todo el ancho: el fondo se extiende fuera del .container
+     pero el contenido sigue alineado con el logo */
+  box-shadow: 0 0 0 100vmax var(--lua-ciruela);
+  clip-path: inset(0 -100vmax);
+}
+
+.footer-lua::before {
+  content: '';
+  position: absolute;
+  inset: 0 -100vmax;
+  background: radial-gradient(40% 60% at 50% 100%, #4A3D5C 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.footer-lua > * { position: relative; }
+
+/* Frase + redes */
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px;
+  padding-bottom: 16px;
+}
+
+.footer-statement {
+  margin: 0;
+  max-width: 16ch;
+  font-family: var(--lua-serif);
+  font-size: clamp(2rem, 4.4vw, 3.5rem);
+  line-height: 1.05;
+  color: var(--lua-blanco);
+}
+
+.footer-social { display: flex; gap: 10px; }
+
+.footer-social-link {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .08);
+  color: var(--lua-blanco);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  transition: background-color .2s ease, color .2s ease;
+}
+
+.footer-social-link:hover {
+  background: var(--lua-lavanda);
+  color: var(--lua-ciruela);
+}
+
+/* Columnas */
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 40px;
+  padding: 48px 0;
+}
+
+.footer-text {
+  max-width: 38ch;
+  font-size: .95rem;
+}
+
+.footer-heading {
+  margin-bottom: 16px;
+  font-size: .95rem;
+  color: var(--lua-lavanda);
+}
+
+.footer-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-list li { margin-bottom: 10px; }
+
+.footer-link {
+  color: rgba(255, 255, 255, .78);
+  font-size: .95rem;
+  text-decoration: none;
+  transition: color .2s ease;
+}
+
+.footer-link:hover { color: var(--lua-blanco); text-decoration: underline; text-underline-offset: 4px; }
+
+.footer-bottom {
+  font-size: .85rem;
+  color: rgba(255, 255, 255, .45);
+}
+
+.footer-bottom p { margin: 0; }
+
+/* Logotipo gigante: ventana recortada a las letras del PNG
+   (las letras ocupan x 22–83 % y 26–66 % de la imagen cuadrada) */
+.footer-wordmark {
+  position: relative;
+  width: min(62%, 700px);
+  aspect-ratio: 1.545;
+  margin: 40px auto -9%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Invertido + "screen": el fondo blanco desaparece y las letras quedan lavanda claro */
+.footer-wordmark-img {
+  position: absolute;
+  width: 165.6%;
+  max-width: none;
+  left: -36.9%;
+  top: -67.8%;
+  filter: invert(1) sepia(.5) hue-rotate(215deg) saturate(1.8) brightness(1.15);
+  mix-blend-mode: screen;
+  opacity: .9;
+  -webkit-mask-image: linear-gradient(#000 42%, transparent 66%);
+  mask-image: linear-gradient(#000 42%, transparent 66%);
+}
+
+@media (max-width: 768px) {
+  .footer-lua { padding: 56px 0 0; }
+  .footer-top { flex-direction: column; align-items: flex-start; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .footer-col-brand { grid-column: 1 / -1; }
+}

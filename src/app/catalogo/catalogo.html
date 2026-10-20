@@ -1,0 +1,31 @@
+<section class="catalogo">
+  <header class="catalogo-head">
+    <div class="catalogo-moon" aria-hidden="true"></div>
+    <ng-container *ngIf="busqueda$ | async as busqueda; else tituloCatalogo">
+      <h1 class="catalogo-title">Resultados para «{{ busqueda }}»</h1>
+      <p class="catalogo-sub">
+        <a routerLink="/catalogo" class="catalogo-limpiar">Ver todo el catálogo</a>
+      </p>
+    </ng-container>
+    <ng-template #tituloCatalogo>
+      <h1 class="catalogo-title">Catálogo</h1>
+      <p class="catalogo-sub">Maquillaje para el día a día y para las noches que lo piden todo.</p>
+    </ng-template>
+  </header>
+
+  <ng-container *ngIf="productos$ | async as productos">
+    <div class="row g-4 gy-5" *ngIf="productos.length; else sinResultados">
+      <div class="col-sm-6 col-lg-4" *ngFor="let p of productos">
+        <app-product-card [producto]="p"></app-product-card>
+      </div>
+    </div>
+
+    <ng-template #sinResultados>
+      <div class="catalogo-vacio">
+        <h2 class="catalogo-vacio-titulo">No encontramos productos</h2>
+        <p>Prueba con otra palabra, como el tipo de producto («labial», «base») o la marca.</p>
+        <a routerLink="/catalogo" class="btn btn-dark px-4 py-2">Ver todo el catálogo</a>
+      </div>
+    </ng-template>
+  </ng-container>
+</section>

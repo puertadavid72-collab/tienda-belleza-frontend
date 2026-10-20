@@ -1,0 +1,187 @@
+/* ===== Lúa — estilos globales ===== */
+
+:root {
+  /* Paleta oficial de Lúa */
+  --lua-lila-claro: #E4D6E9;
+  --lua-lavanda: #CDC7E3;
+  --lua-gris-oscuro: #515151;
+  --lua-crema: #FFFFE9;
+
+  /* Tokens de diseño */
+  --lua-ciruela: #2A2233;      /* texto principal y superficies oscuras */
+  --lua-violeta: #6E5A8A;      /* acciones, precios, enlaces */
+  --lua-violeta-hover: #5A4873;
+  --lua-niebla: #F6F2F8;       /* fondo de página */
+  --lua-linea: #E6E0EC;        /* bordes finos */
+  --lua-texto-suave: #6F6876;
+  --lua-blanco: #FFFFFF;
+
+  --lua-serif: 'Bodoni Moda', 'Didot', Georgia, serif;
+  --lua-sans: 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --lua-radio-sm: 8px;
+  --lua-radio: 14px;
+  --lua-radio-lg: 24px;
+  --lua-sombra: 0 1px 2px rgba(42, 34, 51, .06), 0 8px 24px -12px rgba(42, 34, 51, .18);
+
+  /* Variables de Bootstrap alineadas con la marca */
+  --bs-body-font-family: var(--lua-sans);
+  --bs-body-color: var(--lua-ciruela);
+  --bs-body-bg: var(--lua-niebla);
+  --bs-border-color: var(--lua-linea);
+  --bs-link-color: var(--lua-violeta);
+  --bs-link-hover-color: var(--lua-violeta-hover);
+  --bs-secondary-color: var(--lua-texto-suave);
+}
+
+/* Las bandas oscuras se extienden a todo el ancho; esto evita scroll horizontal */
+html, body { overflow-x: clip; }
+
+body {
+  background-color: var(--lua-niebla);
+  color: var(--lua-ciruela);
+  font-family: var(--lua-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .display-3 {
+  font-family: var(--lua-serif);
+  font-weight: 500 !important;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  color: var(--lua-ciruela);
+}
+
+h4, h5, h6 {
+  font-family: var(--lua-sans);
+  font-weight: 600;
+  color: var(--lua-ciruela);
+}
+
+.text-muted { color: var(--lua-texto-suave) !important; }
+.text-success { color: var(--lua-violeta) !important; }
+
+::selection { background: var(--lua-lavanda); color: var(--lua-ciruela); }
+
+/* ----- Foco visible y accesible ----- */
+:focus-visible {
+  outline: 2px solid var(--lua-violeta);
+  outline-offset: 3px;
+}
+
+/* ----- Botones ----- */
+.btn {
+  font-family: var(--lua-sans);
+  font-weight: 600;
+  border-radius: 999px;
+  padding-inline: 1.25rem;
+  letter-spacing: .01em;
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+.btn-sm { padding-inline: .9rem; }
+.btn.text-uppercase { text-transform: none !important; }
+
+.btn-dark {
+  --bs-btn-bg: var(--lua-ciruela);
+  --bs-btn-border-color: var(--lua-ciruela);
+  --bs-btn-hover-bg: var(--lua-violeta);
+  --bs-btn-hover-border-color: var(--lua-violeta);
+  --bs-btn-active-bg: var(--lua-violeta-hover);
+  --bs-btn-active-border-color: var(--lua-violeta-hover);
+  --bs-btn-disabled-bg: var(--lua-texto-suave);
+  --bs-btn-disabled-border-color: var(--lua-texto-suave);
+}
+
+.btn-success {
+  --bs-btn-bg: var(--lua-violeta);
+  --bs-btn-border-color: var(--lua-violeta);
+  --bs-btn-hover-bg: var(--lua-violeta-hover);
+  --bs-btn-hover-border-color: var(--lua-violeta-hover);
+  --bs-btn-active-bg: var(--lua-violeta-hover);
+}
+
+.btn-secondary {
+  --bs-btn-color: var(--lua-ciruela);
+  --bs-btn-bg: var(--lua-linea);
+  --bs-btn-border-color: var(--lua-linea);
+  --bs-btn-hover-color: var(--lua-ciruela);
+  --bs-btn-hover-bg: var(--lua-lavanda);
+  --bs-btn-hover-border-color: var(--lua-lavanda);
+}
+
+.btn-outline-dark,
+.btn-outline-secondary,
+.btn-outline-primary {
+  --bs-btn-color: var(--lua-ciruela);
+  --bs-btn-border-color: var(--lua-linea);
+  --bs-btn-hover-color: var(--lua-ciruela);
+  --bs-btn-hover-bg: var(--lua-lila-claro);
+  --bs-btn-hover-border-color: var(--lua-lila-claro);
+  --bs-btn-active-bg: var(--lua-lavanda);
+  --bs-btn-active-border-color: var(--lua-lavanda);
+  background-color: var(--lua-blanco);
+}
+
+.btn-outline-danger {
+  --bs-btn-color: #A23B4E;
+  --bs-btn-border-color: #EBD3D8;
+  --bs-btn-hover-bg: #A23B4E;
+  --bs-btn-hover-border-color: #A23B4E;
+  background-color: var(--lua-blanco);
+}
+
+.btn-link.text-danger { color: #A23B4E !important; font-weight: 500; text-underline-offset: 3px; }
+
+/* ----- Formularios ----- */
+.form-label { font-weight: 500; color: var(--lua-ciruela); }
+
+.form-control,
+.form-select {
+  border: 1px solid var(--lua-linea);
+  border-radius: var(--lua-radio-sm);
+  padding: .6rem .85rem;
+  background-color: var(--lua-blanco);
+  color: var(--lua-ciruela);
+}
+.form-control::placeholder { color: #A9A2B0; }
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--lua-violeta);
+  box-shadow: 0 0 0 3px rgba(110, 90, 138, .18);
+}
+
+/* ----- Tarjetas y modales ----- */
+.card {
+  --bs-card-bg: var(--lua-blanco);
+  border: 1px solid var(--lua-linea) !important;
+  border-radius: var(--lua-radio) !important;
+  box-shadow: none !important;
+}
+
+.modal-content {
+  border-radius: var(--lua-radio-lg) !important;
+  border: none;
+  box-shadow: 0 30px 80px -20px rgba(42, 34, 51, .45) !important;
+}
+
+.alert-danger {
+  background: #FBF0F2;
+  border: 1px solid #EBD3D8;
+  color: #8A2F40;
+  border-radius: var(--lua-radio-sm);
+}
+
+hr { border-color: var(--lua-linea); opacity: 1; }
+
+/* Compatibilidad con la clase anterior */
+.menu-lua { background-color: var(--lua-lavanda) !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0s !important;
+    animation-duration: 0s !important;
+    scroll-behavior: auto !important;
+  }
+}

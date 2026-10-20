@@ -1,0 +1,159 @@
+.nosotros { padding: 24px 0 96px; }
+
+/* ----- Apertura: texto + fotos en arco ----- */
+.intro {
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  align-items: center;
+  gap: 56px;
+  padding: 32px 0 64px;
+}
+
+.intro-visual {
+  position: relative;
+  height: 500px;
+}
+
+.intro-moon {
+  position: absolute;
+  top: 0;
+  left: 4%;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  box-shadow: inset -32px 22px 0 0 var(--lua-lavanda);
+  transform: rotate(-12deg);
+}
+
+.intro-arch {
+  position: absolute;
+  object-fit: cover;
+  border-radius: 999px 999px var(--lua-radio) var(--lua-radio);
+  background: var(--lua-lila-claro);
+}
+
+.intro-arch-main {
+  right: 0;
+  top: 24px;
+  width: 64%;
+  height: 440px;
+}
+
+.intro-arch-small {
+  left: 0;
+  bottom: 0;
+  width: 44%;
+  height: 280px;
+  object-position: center 20%;
+  border: 6px solid var(--lua-niebla);
+}
+
+.intro-title {
+  font-size: clamp(3rem, 7vw, 5.75rem);
+  line-height: .98;
+  letter-spacing: -0.02em;
+  margin-bottom: 32px;
+}
+
+.intro-lead {
+  max-width: 34em;
+  margin: 0;
+  font-family: var(--lua-serif);
+  font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+  line-height: 1.55;
+  color: var(--lua-gris-oscuro);
+}
+
+/* ----- Fases: banda de noche ----- */
+.phases {
+  padding: 80px 0 88px;
+  background: var(--lua-ciruela);
+  color: rgba(255, 255, 255, .7);
+  /* A todo el ancho: el fondo se extiende fuera del .container
+     pero el contenido sigue alineado con el logo */
+  box-shadow: 0 0 0 100vmax var(--lua-ciruela);
+  clip-path: inset(0 -100vmax);
+}
+
+.phases-head { margin-bottom: 56px; }
+
+.phases-title {
+  color: var(--lua-blanco);
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 10px;
+}
+
+.phases-sub { margin: 0; font-size: 1.05rem; }
+
+.phases-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+
+/* La línea que une las fases, como una órbita */
+.phase { position: relative; }
+.phase:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 32px;
+  left: 80px;
+  right: -16px;
+  height: 1px;
+  background: rgba(205, 199, 227, .25);
+}
+
+.phase-moon {
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 24px;
+  border-radius: 50%;
+}
+
+.phase-new { border: 1px solid rgba(205, 199, 227, .5); }
+.phase-crescent { box-shadow: inset -14px 0 0 0 var(--lua-lavanda), 0 0 0 1px rgba(205, 199, 227, .2); }
+.phase-half { background: linear-gradient(90deg, transparent 50%, var(--lua-lavanda) 50%); box-shadow: 0 0 0 1px rgba(205, 199, 227, .2); }
+.phase-full { background: var(--lua-lavanda); box-shadow: 0 0 40px -4px rgba(205, 199, 227, .55); }
+
+.phase-name {
+  color: var(--lua-blanco);
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+}
+
+.phase-text { margin: 0; font-size: .95rem; max-width: 28ch; }
+
+/* ----- Cierre ----- */
+.closing {
+  padding: 88px 0 0;
+  text-align: center;
+}
+
+.closing-title { font-size: clamp(1.9rem, 3.6vw, 2.75rem); margin-bottom: 10px; }
+.closing-text { color: var(--lua-texto-suave); font-size: 1.05rem; margin-bottom: 28px; }
+
+.closing-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+@media (max-width: 900px) {
+  .intro { grid-template-columns: 1fr; gap: 40px; }
+  .intro-visual { height: 380px; max-width: 460px; }
+  .intro-arch-main { height: 340px; }
+  .intro-arch-small { height: 210px; }
+  .intro-moon { width: 130px; height: 130px; box-shadow: inset -22px 15px 0 0 var(--lua-lavanda); }
+  .phases { padding: 56px 0; }
+  .phases-list { grid-template-columns: 1fr 1fr; gap: 40px 24px; }
+  .phase::after { display: none; }
+}
+
+@media (max-width: 480px) {
+  .phases-list { grid-template-columns: 1fr; }
+}

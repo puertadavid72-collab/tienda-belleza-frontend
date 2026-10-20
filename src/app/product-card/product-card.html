@@ -1,0 +1,48 @@
+<article class="product-card">
+  <div class="product-media">
+    <img
+      *ngIf="imagenActual && !imagenRota"
+      [src]="imagenActual"
+      (error)="imagenRota = true"
+      class="product-img"
+      [alt]="producto.nombre">
+
+    <div *ngIf="!imagenActual || imagenRota" class="sin-imagen">
+      <i class="bi bi-image" aria-hidden="true"></i>
+      <span>Sin foto</span>
+    </div>
+  </div>
+
+  <div class="product-body">
+    <h5 class="product-name">{{ producto.nombre }}</h5>
+    <p class="product-desc">{{ producto.descripcion }}</p>
+
+    <div *ngIf="(producto.variantes?.length || 0) > 1" class="product-variants">
+      <button
+        type="button"
+        *ngFor="let v of producto.variantes"
+        class="btn btn-sm variant-chip"
+        [class.btn-dark]="varianteSeleccionada?.id === v.id"
+        [class.btn-outline-secondary]="varianteSeleccionada?.id !== v.id"
+        [class.text-decoration-line-through]="v.stock === 0"
+        (click)="seleccionarVariante(v)">
+        <span
+          *ngIf="v.codigo_hex"
+          class="variant-swatch"
+          [style.background-color]="v.codigo_hex"></span>
+        {{ etiqueta(v) }}
+      </button>
+    </div>
+
+    <div class="product-footer">
+      <p class="product-price">${{ producto.precio | number }}</p>
+      <button
+        class="btn product-btn"
+        [disabled]="!varianteSeleccionada || varianteSeleccionada.stock === 0"
+        (click)="comprarProducto(producto)">
+        <i class="bi bi-bag-plus" aria-hidden="true"></i>
+        {{ varianteSeleccionada && varianteSeleccionada.stock === 0 ? 'Agotado' : 'Agregar al Carrito' }}
+      </button>
+    </div>
+  </div>
+</article>

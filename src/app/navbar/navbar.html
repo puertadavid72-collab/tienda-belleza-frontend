@@ -1,0 +1,32 @@
+<nav class="lua-header-container">
+  <div class="lua-bar">
+    <ul class="lua-nav-links">
+      <li class="lua-nav-item">
+        <a class="lua-nav-link" routerLink="/inicio">Inicio</a>
+      </li>
+      <li class="lua-nav-item">
+        <a class="lua-nav-link" routerLink="/catalogo">Catálogo</a>
+      </li>
+      <li class="lua-nav-item">
+        <a class="lua-nav-link" routerLink="/nosotros">Nosotros</a>
+      </li>
+    </ul>
+
+    <a class="lua-brand-link" routerLink="/" aria-label="Lúa, ir al inicio">
+      <img src="logo.png" alt="Lúa" class="lua-logo-img">
+    </a>
+
+    <div class="lua-actions">
+      <form class="lua-search-form" role="search" (submit)="buscar($event, campoBuscar.value)">
+        <i class="bi bi-search lua-search-icon" aria-hidden="true"></i>
+        <input #campoBuscar class="lua-search-input" type="search" name="buscar" placeholder="Buscar" aria-label="Buscar productos" enterkeyhint="search" maxlength="100">
+      </form>
+
+      <a class="lua-cart-link" routerLink="/carrito" aria-label="Ver carrito">
+        <i class="bi bi-bag" aria-hidden="true"></i>
+        <span class="lua-cart-text">Carrito</span>
+        <span class="lua-cart-badge">{{ carritoService.cantidadItems$ | async }}</span>
+      </a>
+    </div>
+  </div>
+</nav>

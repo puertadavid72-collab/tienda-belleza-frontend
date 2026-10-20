@@ -1,0 +1,269 @@
+<div class="admin">
+
+  <!-- Encabezado: banda de noche -->
+  <header class="admin-head">
+    <div>
+      <h2 class="admin-title">Panel de administración</h2>
+      <p class="admin-sub">Gestiona categorías, marcas, colores y productos de la tienda.</p>
+    </div>
+    <button class="btn admin-logout" (click)="cerrarSesion()">
+      <i class="bi bi-box-arrow-right" aria-hidden="true"></i> Cerrar sesión
+    </button>
+  </header>
+
+  <!-- ===== Categorías ===== -->
+  <section class="panel">
+    <h4 class="panel-title">Categorías</h4>
+
+    <div class="panel-add">
+      <h5 class="panel-add-title">Nueva categoría</h5>
+      <div class="add-grid add-grid-cat">
+        <div>
+          <label class="form-label">Nombre</label>
+          <input type="text" class="form-control" placeholder="Ej: Bases" [(ngModel)]="nuevaCategoria.nombre">
+        </div>
+        <div>
+          <label class="form-label">URL de imagen (opcional)</label>
+          <input type="text" class="form-control" placeholder="https://..." [(ngModel)]="nuevaCategoria.imagen">
+        </div>
+        <button class="btn btn-dark" (click)="crearCategoria()">Agregar</button>
+      </div>
+    </div>
+
+    <div class="row-item" *ngFor="let cat of categorias$ | async">
+
+      <div class="row-view" *ngIf="categoriaEditando?.id !== cat.id">
+        <img class="row-thumb" [src]="cat.imagen || 'sin-foto.svg'" alt="">
+        <strong class="row-name">{{ cat.nombre }}</strong>
+        <div class="row-actions">
+          <button class="act" (click)="editarCategoria(cat)"><i class="bi bi-pencil" aria-hidden="true"></i> Editar</button>
+          <button class="act act-danger" (click)="eliminarCategoria(cat.id)"><i class="bi bi-trash3" aria-hidden="true"></i> Eliminar</button>
+        </div>
+      </div>
+
+      <div class="row-edit" *ngIf="categoriaEditando?.id === cat.id">
+        <input type="text" class="form-control" aria-label="Nombre" [(ngModel)]="categoriaEditando.nombre">
+        <input type="text" class="form-control" placeholder="URL de imagen" [(ngModel)]="categoriaEditando.imagen">
+        <div class="row-actions">
+          <button class="btn btn-sm btn-success" (click)="guardarEdicionCategoria()">Guardar</button>
+          <button class="btn btn-sm btn-secondary" (click)="cancelarEdicionCategoria()">Cancelar</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== Marcas ===== -->
+  <section class="panel">
+    <h4 class="panel-title">Marcas</h4>
+
+    <div class="panel-add">
+      <h5 class="panel-add-title">Nueva marca</h5>
+      <div class="add-grid add-grid-one">
+        <div>
+          <label class="form-label">Nombre</label>
+          <input type="text" class="form-control" placeholder="Ej: Dolce Bella" [(ngModel)]="nuevaMarca.nombre">
+        </div>
+        <button class="btn btn-dark" (click)="crearMarca()">Agregar</button>
+      </div>
+    </div>
+
+    <div class="row-item" *ngFor="let m of marcas$ | async">
+
+      <div class="row-view" *ngIf="marcaEditando?.id !== m.id">
+        <strong class="row-name">{{ m.nombre }}</strong>
+        <div class="row-actions">
+          <button class="act" (click)="editarMarca(m)"><i class="bi bi-pencil" aria-hidden="true"></i> Editar</button>
+          <button class="act act-danger" (click)="eliminarMarca(m.id)"><i class="bi bi-trash3" aria-hidden="true"></i> Eliminar</button>
+        </div>
+      </div>
+
+      <div class="row-edit row-edit-one" *ngIf="marcaEditando?.id === m.id">
+        <input type="text" class="form-control" aria-label="Nombre" [(ngModel)]="marcaEditando.nombre">
+        <div class="row-actions">
+          <button class="btn btn-sm btn-success" (click)="guardarEdicionMarca()">Guardar</button>
+          <button class="btn btn-sm btn-secondary" (click)="cancelarEdicionMarca()">Cancelar</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== Colores: muestras ===== -->
+  <section class="panel">
+    <h4 class="panel-title">Colores</h4>
+
+    <div class="panel-add">
+      <h5 class="panel-add-title">Nuevo color</h5>
+      <div class="add-grid add-grid-color">
+        <div>
+          <label class="form-label">Nombre</label>
+          <input type="text" class="form-control" placeholder="Ej: Rojo intenso" [(ngModel)]="nuevoColor.nombre">
+        </div>
+        <div>
+          <label class="form-label">Código hex (opcional)</label>
+          <input type="text" class="form-control" placeholder="#E63946" [(ngModel)]="nuevoColor.codigo_hex">
+        </div>
+        <button class="btn btn-dark" (click)="crearColor()">Agregar</button>
+      </div>
+    </div>
+
+    <div class="swatches">
+      <div class="swatch" *ngFor="let c of colores$ | async">
+
+        <div class="swatch-view" *ngIf="colorEditando?.id !== c.id">
+          <div class="swatch-chip" [style.background-color]="c.codigo_hex || '#ccc'"></div>
+          <strong class="swatch-name">{{ c.nombre }}</strong>
+          <div class="swatch-actions">
+            <button class="act" (click)="editarColor(c)">Editar</button>
+            <button class="act act-danger" (click)="eliminarColor(c.id)">Eliminar</button>
+          </div>
+        </div>
+
+        <div class="swatch-edit" *ngIf="colorEditando?.id === c.id">
+          <input type="text" class="form-control form-control-sm" aria-label="Nombre" [(ngModel)]="colorEditando.nombre">
+          <input type="text" class="form-control form-control-sm" placeholder="#000000" [(ngModel)]="colorEditando.codigo_hex">
+          <div class="swatch-actions">
+            <button class="btn btn-sm btn-success" (click)="guardarEdicionColor()">Guardar</button>
+            <button class="btn btn-sm btn-secondary" (click)="cancelarEdicionColor()">Cancelar</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Productos ===== -->
+  <section class="panel">
+    <h4 class="panel-title">Productos</h4>
+
+    <div class="panel-add">
+      <h5 class="panel-add-title">Nuevo producto</h5>
+      <div class="add-grid add-grid-two">
+        <div>
+          <label class="form-label">Nombre</label>
+          <input type="text" class="form-control" placeholder="Ej: Base líquida mate" [(ngModel)]="nuevoProducto.nombre">
+        </div>
+        <div>
+          <label class="form-label">Descripción</label>
+          <input type="text" class="form-control" placeholder="Ej: Cobertura media, acabado mate" [(ngModel)]="nuevoProducto.descripcion">
+        </div>
+      </div>
+      <div class="add-grid add-grid-prod">
+        <div>
+          <label class="form-label">Precio</label>
+          <input type="number" class="form-control" placeholder="Ej: 25000" [(ngModel)]="nuevoProducto.precio">
+        </div>
+        <div>
+          <label class="form-label">Categoría</label>
+          <select class="form-select" [(ngModel)]="nuevoProducto.categoria_id">
+            <option [value]="null" disabled selected>Selecciona una categoría</option>
+            <option *ngFor="let cat of categorias$ | async" [value]="cat.id">{{ cat.nombre }}</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">Marca</label>
+          <select class="form-select" [(ngModel)]="nuevoProducto.marca_id">
+            <option [value]="null" disabled selected>Selecciona una marca</option>
+            <option *ngFor="let m of marcas$ | async" [value]="m.id">{{ m.nombre }}</option>
+          </select>
+        </div>
+        <button class="btn btn-dark" (click)="crearProducto()">Agregar</button>
+      </div>
+    </div>
+
+    <div class="row-item" *ngFor="let prod of productos$ | async">
+
+      <div class="row-view row-view-prod" *ngIf="productoEditando?.id !== prod.id">
+        <div class="row-main">
+          <strong class="row-name">{{ prod.nombre }}</strong>
+          <div class="row-desc">{{ prod.descripcion }}</div>
+        </div>
+        <div class="row-price">${{ prod.precio | number }}</div>
+        <div class="row-meta">Cat: {{ prod.categoria_id }} · Marca: {{ prod.marca_id }}</div>
+        <div class="row-actions">
+          <button class="act act-accent" (click)="abrirModalVariantes(prod)"><i class="bi bi-palette" aria-hidden="true"></i> Variantes</button>
+          <button class="act" (click)="editarProducto(prod)"><i class="bi bi-pencil" aria-hidden="true"></i> Editar</button>
+          <button class="act act-danger" (click)="eliminarProducto(prod.id)"><i class="bi bi-trash3" aria-hidden="true"></i> Eliminar</button>
+        </div>
+      </div>
+
+      <div class="row-edit row-edit-prod" *ngIf="productoEditando?.id === prod.id">
+        <div class="row-edit-stack">
+          <input type="text" class="form-control" aria-label="Nombre" [(ngModel)]="productoEditando.nombre">
+          <input type="text" class="form-control" aria-label="Descripción" [(ngModel)]="productoEditando.descripcion">
+        </div>
+        <input type="number" class="form-control" aria-label="Precio" [(ngModel)]="productoEditando.precio">
+        <select class="form-select" aria-label="Categoría" [(ngModel)]="productoEditando.categoria_id">
+          <option *ngFor="let cat of categorias$ | async" [value]="cat.id">{{ cat.nombre }}</option>
+        </select>
+        <select class="form-select" aria-label="Marca" [(ngModel)]="productoEditando.marca_id">
+          <option *ngFor="let m of marcas$ | async" [value]="m.id">{{ m.nombre }}</option>
+        </select>
+        <div class="row-actions">
+          <button class="btn btn-sm btn-success" (click)="guardarEdicionProducto()">Guardar</button>
+          <button class="btn btn-sm btn-secondary" (click)="cancelarEdicionProducto()">Cancelar</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== Modal de variantes ===== -->
+  <div class="modal fade" [class.show]="mostrarModalVariantes" [ngStyle]="{'display': mostrarModalVariantes ? 'block' : 'none'}" [style.background-color]="mostrarModalVariantes ? 'rgba(0,0,0,0.5)' : 'transparent'" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content p-4" *ngIf="productoSeleccionado">
+
+        <div class="modal-head">
+          <div>
+            <p class="modal-kicker">Variantes de</p>
+            <h4 class="modal-title-lua">{{ productoSeleccionado.nombre }}</h4>
+          </div>
+          <button type="button" class="modal-close" aria-label="Cerrar" (click)="cerrarModalVariantes()"><i class="bi bi-x-lg"></i></button>
+        </div>
+
+        <div class="panel-add variant-add">
+          <div class="add-grid add-grid-variant">
+            <div>
+              <label class="form-label">Color</label>
+              <select class="form-select" [(ngModel)]="nuevaVariante.color_id">
+                <option [value]="null" disabled selected>Selecciona un color</option>
+                <option *ngFor="let c of colores$ | async" [value]="c.id">{{ c.nombre }}</option>
+              </select>
+            </div>
+            <div>
+              <label class="form-label">Stock</label>
+              <input type="number" class="form-control" [(ngModel)]="nuevaVariante.stock">
+            </div>
+            <button class="btn btn-dark" (click)="agregarVariante()">Agregar</button>
+          </div>
+        </div>
+
+        <div *ngIf="variantesDelProducto.length === 0" class="variant-empty">
+          Este producto no tiene variantes todavía.
+        </div>
+
+        <div class="variant-row" *ngFor="let v of variantesDelProducto">
+          <div class="variant-left">
+            <img *ngIf="v.imagen" [src]="v.imagen" class="variant-photo" alt="">
+            <div *ngIf="!v.imagen" class="variant-photo variant-nophoto">Sin foto</div>
+            <div class="variant-dot" [style.background-color]="v.codigo_hex || '#ccc'"></div>
+            <select class="form-select form-select-sm variant-select" aria-label="Color" [ngModel]="v.color_id" (ngModelChange)="v.color_id = $event; cambiarColorVariante(v)">
+              <option *ngFor="let c of colores$ | async" [ngValue]="c.id">{{ c.nombre }}</option>
+            </select>
+          </div>
+          <div class="variant-right">
+            <label class="btn btn-sm btn-outline-primary mb-0">
+              {{ subiendoVarianteId === v.id ? 'Subiendo...' : (v.imagen ? 'Cambiar foto' : 'Subir foto') }}
+              <input type="file" accept="image/*" hidden (change)="subirFoto(v, $event)">
+            </label>
+            <input type="number" class="form-control form-control-sm variant-stock" aria-label="Stock" [(ngModel)]="v.stock" (change)="actualizarStockVariante(v)">
+            <button class="act act-danger" (click)="eliminarVariante(v.id)">Eliminar</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

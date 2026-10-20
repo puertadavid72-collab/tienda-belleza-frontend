@@ -1,0 +1,209 @@
+/* ----- Hero: noche ciruela con la luna creciente del logo ----- */
+.hero-video-container {
+  position: relative;
+  min-height: 560px;
+  display: flex;
+  align-items: center;
+  margin: -1.5rem 0 72px; /* pegado al navbar (anula el mt-4 del contenedor) */
+  background: var(--lua-ciruela);
+  color: var(--lua-blanco);
+  /* A todo el ancho: el fondo se extiende fuera del .container
+     pero el contenido sigue alineado con el logo */
+  box-shadow: 0 0 0 100vmax var(--lua-ciruela);
+  clip-path: inset(-2px -100vmax 0); /* -2px: evita una línea clara al unirse con el navbar */
+}
+
+/* Resplandor de fondo, también a todo el ancho */
+.hero-video-container::before {
+  content: '';
+  position: absolute;
+  inset: 0 -100vmax;
+  background: radial-gradient(45% 80% at 72% 40%, #4A3D5C 0%, transparent 70%);
+  /* Se desvanece hacia arriba: sin costura con el navbar */
+  -webkit-mask-image: linear-gradient(transparent, #000 35%);
+  mask-image: linear-gradient(transparent, #000 35%);
+}
+
+/* Luna creciente: sombra interior sobre un círculo transparente */
+.hero-overlay {
+  position: absolute;
+  width: 440px;
+  height: 440px;
+  right: 0;
+  top: 50%;
+  margin-top: -220px;
+  border-radius: 50%;
+  box-shadow:
+    inset -70px 50px 0 0 var(--lua-lavanda),
+    0 0 120px -20px rgba(205, 199, 227, .35);
+  transform: rotate(-12deg);
+  animation: luna-sale 1.4s cubic-bezier(.2, .7, .2, 1) both;
+}
+
+@keyframes luna-sale {
+  from { opacity: 0; transform: translateY(40px) rotate(-40deg); }
+  to   { transform: translateY(0) rotate(-12deg); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+  padding: 80px 0;
+}
+
+.hero-kicker {
+  color: var(--lua-lavanda);
+  font-size: .95rem;
+  font-weight: 500;
+  margin-bottom: 18px;
+}
+
+.hero-title {
+  color: var(--lua-blanco);
+  font-size: clamp(2.5rem, 5.2vw, 4.25rem);
+  line-height: 1.02;
+  margin-bottom: 22px;
+}
+
+.hero-text {
+  color: rgba(255, 255, 255, .72);
+  font-size: 1.125rem;
+  max-width: 46ch;
+  margin-bottom: 34px;
+}
+
+.hero-btn {
+  background: var(--lua-lavanda);
+  color: var(--lua-ciruela);
+  padding: 14px 32px;
+  font-size: 1rem;
+}
+.hero-btn:hover { background: var(--lua-blanco); color: var(--lua-ciruela); }
+
+/* ----- Categorías ----- */
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 24px;
+}
+
+.section-title {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  margin: 0;
+}
+
+.carousel-arrows { display: flex; gap: 8px; }
+
+.arrow-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--lua-linea);
+  background: var(--lua-blanco);
+  color: var(--lua-ciruela);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color .2s ease, border-color .2s ease;
+}
+.arrow-btn:hover { background: var(--lua-ciruela); border-color: var(--lua-ciruela); color: var(--lua-blanco); }
+
+.cards-container {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 8px;
+  margin-bottom: 96px;
+  scrollbar-width: none;
+}
+.cards-container::-webkit-scrollbar { display: none; }
+
+.category-card {
+  flex: 0 0 280px;
+  scroll-snap-align: start;
+  background: var(--lua-blanco);
+  border-radius: var(--lua-radio);
+  overflow: hidden;
+}
+
+.category-media { overflow: hidden; background: var(--lua-lila-claro); }
+
+.category-img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  display: block;
+  transition: transform .5s ease;
+}
+.category-card:hover .category-img { transform: scale(1.04); }
+
+.category-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 18px;
+}
+
+.category-name {
+  margin: 0;
+  font-size: .9rem;
+  letter-spacing: .06em;
+}
+
+.category-icon-btn {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--lua-lila-claro);
+  color: var(--lua-ciruela);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color .2s ease, color .2s ease;
+}
+.category-card:hover .category-icon-btn { background: var(--lua-ciruela); color: var(--lua-blanco); }
+
+/* ----- WhatsApp flotante ----- */
+.whatsapp-flotante {
+  position: fixed !important;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.whatsapp-flotante img {
+  width: 56px;
+  height: 56px;
+  background: #25D366;
+  border-radius: 50%;
+  padding: 12px;
+  box-shadow: 0 8px 20px -6px rgba(0, 0, 0, .35);
+  transition: transform .2s ease;
+}
+.whatsapp-flotante:hover img { transform: scale(1.06); }
+
+.whatsapp-tooltip {
+  background: var(--lua-blanco);
+  color: var(--lua-ciruela);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: .85rem;
+  font-weight: 600;
+  box-shadow: var(--lua-sombra);
+}
+
+@media (max-width: 768px) {
+  .hero-video-container { min-height: 460px; }
+  .hero-content { padding: 56px 0; }
+  .hero-overlay { width: 300px; height: 300px; margin-top: -150px; right: -90px; opacity: .55; box-shadow: inset -48px 34px 0 0 var(--lua-lavanda); }
+  .category-card { flex-basis: 240px; }
+}
